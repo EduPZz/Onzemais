@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
-import { Breadcrumb, Button, Divider, Layout, Menu, Space, theme } from 'antd';
+import { Breadcrumb, Button, Layout, Menu, Space, theme } from 'antd';
 import { Outlet } from 'react-router-dom';
 
 import { Context } from "../Context/AuthContext";
@@ -15,7 +15,6 @@ const App = () => {
   const { handleLogout, user } = useContext(Context);
 
   const visible = user?.perfil === 'admin' ? 'block' : 'none';
-  console.log(visible)
   return (
     <Layout>
       <Header
