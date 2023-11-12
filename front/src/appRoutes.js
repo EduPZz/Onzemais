@@ -7,6 +7,7 @@ import { Context } from './Context/AuthContext';
 import Login from './pages/login';
 import Private from './pages/private';
 import Signin from './pages/signin';
+import LoggedInLayout from './layout';
 
 
 function LogedRoutes() {
@@ -26,6 +27,7 @@ function LogedRoutes() {
 function AdminRoutes(){
   const { user } = useContext(Context);
 
+  console.log(user)
   if(user.perfil !== 'admin'){
     return <Navigate to="/privado" />;
   }
@@ -40,9 +42,11 @@ export default function AppRoutes() {
       <Route path="/login" element={<Login/>} />
       <Route path="/signin" element={<Signin/>} />
       <Route element={<LogedRoutes/>}>
-        <Route path="/privado" element={<Private/>} />
-        <Route path="/admin" element={<AdminRoutes/>}>
-          <Route path="*" element={<h1>Not Found 404</h1>} />
+        <Route element={<LoggedInLayout/>}>
+          <Route path="/privado" element={<Private/>} />
+          <Route path="/admin" element={<AdminRoutes/>}>
+            <Route path="*" element={<h1>Not Found 404</h1>} />
+          </Route>
         </Route>
       </Route>
     </Routes>

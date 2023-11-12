@@ -13,18 +13,25 @@ export default function useAuth() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-
+    const user = localStorage.getItem("user");
     if(token){
       api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
       setAuthenticated(true);
     }
+
+    if (user){
+      setUser(JSON.parse(user));
+      setUserProfile(JSON.parse(user).perfil);
+    }
+
     setLoading(false);
   }, []);
 
   const getUser = async () => {
     try {
-      const { data } = await api.get("/auth/me");
+      const { data } = await api.post("/auth/me");
       setUser(data);
+      localStorage.setItem("user", JSON.stringify(data));
       setUserProfile(data.perfil);
     } catch (error) {
       console.log(error);
