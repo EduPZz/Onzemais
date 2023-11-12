@@ -1,13 +1,13 @@
-import React, { useState, useContext } from "react";
-import { message } from 'antd';
-import "./index.css";
+import React, { useContext } from 'react';
+import { LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
+import { Button, Card, Form, Input, Switch, message } from 'antd';
 
 import { Context } from "../../Context/AuthContext";
-import { Link } from "react-router-dom";
 
-function Login() {
-  const [email, setUsuario] = useState("");
-  const [senha, setSenha] = useState("");
+import { CardContainer, CentrilizerContainer } from './styles';
+import { Link } from 'react-router-dom';
+
+const Login = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const { handleLogin } = useContext(Context);
@@ -26,41 +26,72 @@ function Login() {
     });
   };
 
-  const handleSubimit = async (e) => {
-    e.preventDefault();
-    handleLogin(email, senha, successMessage, errorMessage);
-  }
-  
+  const onFinish = async (values) => {
+    try {
+      values = {
+        ...values,
+        perfil: values?.perfil ? 'cliente' : 'admin'
+      }
+      handleLogin(values.email, values.senha, successMessage, errorMessage);
+    } catch (error) {
+      errorMessage(error.response.data.message);
+    }
+  };
 
   return (
-    <div className="mainContainer">
+    <CardContainer>
       {contextHolder}
-      <div className="container">
-        <div className="header">
-          <p>Onzemais</p>
-        </div>
-        <div className="content">
-          <div className="email">
-            <p className="pLogin">E-mail</p>
-            <input type="email" value={email} onChange={(e) => setUsuario(e.target.value)} className="inputLogin" />
-          </div>
-          <div className="senha">
-            <p className="pLogin">Senha</p>
-            <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} className="inputLogin" />
-          </div>
-          <button className="btnLogin" onClick={handleSubimit} type="button">
-            Entrar
-          </button>
-          <Link to="/signin" className="linkLogin">
-            <p className="lLogin">Não possui conta?</p>
-          </Link>
-        </div>
-        <footer className="footerLogin">
-          <p className="pFooter">Todos os direitos reservados</p>
-        </footer>
-      </div>
-    </div>
-  );
-}
+      <Card  title="Login" style={{ width: 300, boxShadow: "0 0 40px 4px gray" }}>
+        <Form
+          name="normal_login"
+          className="login-form"
+          onFinish={onFinish}
+          initialValues={{perfil: true}}
+        >
+          <Form.Item
+            name="email"
+            rules={[
+              {
+                required: true,
+                type: 'email'
+              },
+            ]}
+          >
+            <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
+          </Form.Item>
+          <Form.Item
+            name="senha"
+            rules={[
+              {
+                required: true
+              },
+            ]}
+          >
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
 
+          <Form.Item>
+            <Link to="/signin">
+              <p>
+                Não possui conta? Registre-se
+              </p>
+            </Link>
+          </Form.Item>
+
+          <Form.Item>
+            <CentrilizerContainer>
+              <Button type="primary"  htmlType="submit" className="login-form-button">
+                Entrar
+              </Button>
+            </CentrilizerContainer>
+          </Form.Item>
+        </Form>
+      </Card>
+    </CardContainer>
+  );
+};
 export default Login;
