@@ -43,7 +43,7 @@ const Signin = () => {
   return (
     <CardContainer>
       {contextHolder}
-      <Card title="Registrar-se" style={{ width: 300 }}>
+      <Card title="Registrar-se" style={{ width: 300, boxShadow: "0 0 40px 4px gray" }}>
         <Form
           name="normal_login"
           className="login-form"
@@ -104,7 +104,7 @@ const Signin = () => {
           <Form.Item>
             <Link to="/login">
               <p>
-                Já possui conta?
+                Já possui conta? Entre
               </p>
             </Link>
           </Form.Item>
