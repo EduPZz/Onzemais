@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined, ShopOutlined } from '@ant-design/icons';
+import { LaptopOutlined, NotificationOutlined, UserOutlined, ShopOutlined, CalendarOutlined } from '@ant-design/icons';
 import { Breadcrumb, Button, Layout, Menu, Space, theme } from 'antd';
 import { Link, Outlet } from 'react-router-dom';
 
@@ -53,19 +53,18 @@ const App = () => {
                   Empresas
                 </Link>
               </Menu.Item>
-              <Menu.Item key="2" icon={<LaptopOutlined />}>
-                Option 2
+              <Menu.Item key="2" icon={<CalendarOutlined />}>
+                <Link to="/locacoes">
+                  Suas locações
+                </Link>
               </Menu.Item>
-              <Menu.Item key="3" icon={<NotificationOutlined />}>
-                Option 3
-              </Menu.Item>
-              <Menu.Item key="4" style={{display: `${visible}`}} icon={<UserOutlined />}>
+              <Menu.Item key="3" style={{display: `${visible}`}} icon={<UserOutlined />}>
                   Option 1
                 </Menu.Item>
-              <Menu.Item key="5" style={{display: `${visible}`}} icon={<LaptopOutlined />}>
+              <Menu.Item key="4" style={{display: `${visible}`}} icon={<LaptopOutlined />}>
                 Option 2
               </Menu.Item>
-              <Menu.Item key="6" style={{display: `${visible}`}}  icon={<NotificationOutlined />}>
+              <Menu.Item key="5" style={{display: `${visible}`}}  icon={<NotificationOutlined />}>
                 Option 3
               </Menu.Item>
             </Menu>

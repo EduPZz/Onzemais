@@ -1,21 +1,21 @@
 ### FindAll
 GET http://localhost:3000/alugueis-coletes HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsIm5hbWUiOiJFZHVhcmFzZGFzZGZmZG8iLCJwZXJmaWwiOiJhZGFzZGZtaW4iLCJpYXQiOjE2OTk3NDcwMzAsImV4cCI6MTY5OTgzMzQzMH0.YMhhfyuSEUxYWKFsUUjoPV-4-movEacQRqYleu6dS7M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsIm5hbWUiOiJUZXN0ZSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNjk5OTA5NTk0LCJleHAiOjE2OTk5OTU5OTR9.5aRZtFHgXZds7znR036Qltuq7jn-W6au4c9W0t6fi-o
 
 ### FindOne
 GET http://localhost:3000/alugueis-coletes/3 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsIm5hbWUiOiJFZHVhcmFzZGFzZGZmZG8iLCJwZXJmaWwiOiJhZGFzZGZtaW4iLCJpYXQiOjE2OTk3NDcwMzAsImV4cCI6MTY5OTgzMzQzMH0.YMhhfyuSEUxYWKFsUUjoPV-4-movEacQRqYleu6dS7M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsIm5hbWUiOiJUZXN0ZSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNjk5OTA5NTk0LCJleHAiOjE2OTk5OTU5OTR9.5aRZtFHgXZds7znR036Qltuq7jn-W6au4c9W0t6fi-o
 
 ### Create
 POST http://localhost:3000/alugueis-coletes HTTP/1.1
 Content-Type:  application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsIm5hbWUiOiJFZHVhcmFzZGFzZGZmZG8iLCJwZXJmaWwiOiJhZGFzZGZtaW4iLCJpYXQiOjE2OTk3NDcwMzAsImV4cCI6MTY5OTgzMzQzMH0.YMhhfyuSEUxYWKFsUUjoPV-4-movEacQRqYleu6dS7M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsIm5hbWUiOiJUZXN0ZSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNjk5OTA5NTk0LCJleHAiOjE2OTk5OTU5OTR9.5aRZtFHgXZds7znR036Qltuq7jn-W6au4c9W0t6fi-o
 
 {
     "coleteId": 1,
     "locacaoId": 2,
     "data_inicio_locacao": "2023-11-19T21:49:58.543Z",
-    "data_final_locacao": "2023-11-20T22:49:58.543Z"
+    "data_final_locacao": "2023-11-23T22:49:58.543Z"
 }
 
 ### Update

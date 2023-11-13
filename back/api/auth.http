@@ -9,4 +9,4 @@ content-type: application/json
 
 ### Me
 POST http://localhost:3000/auth/me HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsIm5hbWUiOiJUZXN0ZSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNjk5ODM0NzEwLCJleHAiOjE2OTk5MjExMTB9.8KxbnDAn0DPLXcIFHlXTUcR-Vy0tfxyaR2DjWBT8_4I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJFZHVhcmRvIiwicGVyZmlsIjoiY2xpZW50ZSIsImlhdCI6MTY5OTkxMDYyMiwiZXhwIjoxNjk5OTk3MDIyfQ._Ga3l4dVCdpdWD5V5OEw2vyf5cduVJpkX8Xwy_0pA0s

@@ -10,6 +10,7 @@ import Signin from './pages/signin';
 import LoggedInLayout from './layout';
 import Empresas from './pages/empresas';
 import Empresa from './components/empresa';
+import Locacoes from './pages/locacoes';
 
 
 function LogedRoutes() {
@@ -48,6 +49,7 @@ export default function AppRoutes() {
           <Route path="/privado" element={<Private/>} />
           <Route path="/empresas/:id" element={<Empresa/>} />
           <Route path="/empresas" element={<Empresas/>} />
+          <Route path="/locacoes" element={<Locacoes/>} />
           <Route path="/admin" element={<AdminRoutes/>}>
             <Route path="*" element={<h1>Not Found 404</h1>} />
           </Route>

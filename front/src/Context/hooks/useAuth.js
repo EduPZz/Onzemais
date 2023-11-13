@@ -55,6 +55,7 @@ export default function useAuth() {
   async function handleLogout(){
     setAuthenticated(false);
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     api.defaults.headers.Authorization = undefined;
     navigate("/login");
   }

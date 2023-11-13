@@ -34,6 +34,11 @@ export class LocacoesController {
     return this.locacoesService.findOne(+id);
   }
 
+  @Get('usuario/:id')
+  findByUser(@Param('id', ParseIntPipe) id: string) {
+    return this.locacoesService.findByUser(+id);
+  }
+
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: string,
