@@ -10,11 +10,11 @@ POST http://localhost:3000/usuarios HTTP/1.1
 Content-Type:  application/json
 
 {
-    "senha": "Tewergste@123",
-    "email": "Teswergte@teste.com" ,
+    "senha": "Teste@123",
+    "email": "eduardo@teste.com" ,
     "nome": "Teste",
     "perfil": "admin",
-    "empresa_id": 2
+    "empresa_id": null
 }
 
 ### Update

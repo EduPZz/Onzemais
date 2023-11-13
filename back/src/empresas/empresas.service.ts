@@ -24,7 +24,10 @@ export class EmpresasService {
   }
 
   findOne(id: number) {
-    return this.prisma.empresa.findUniqueOrThrow({ where: { id } });
+    return this.prisma.empresa.findUniqueOrThrow({
+      where: { id },
+      include: { Colete: true, EspacoEsportivo: true },
+    });
   }
 
   async update(id: number, updateEmpresaDto: UpdateEmpresaDto) {

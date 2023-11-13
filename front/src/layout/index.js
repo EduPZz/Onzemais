@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import { LaptopOutlined, NotificationOutlined, UserOutlined, ShopOutlined } from '@ant-design/icons';
 import { Breadcrumb, Button, Layout, Menu, Space, theme } from 'antd';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 import { Context } from "../Context/AuthContext";
 
@@ -48,8 +48,10 @@ const App = () => {
                 marginTop: '32px',
               }}
             >
-              <Menu.Item key="1" icon={<UserOutlined />}>
-                Option 1
+              <Menu.Item key="1" icon={<ShopOutlined />}>
+                <Link to="/empresas">
+                  Empresas
+                </Link>
               </Menu.Item>
               <Menu.Item key="2" icon={<LaptopOutlined />}>
                 Option 2

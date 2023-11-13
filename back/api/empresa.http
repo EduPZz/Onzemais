@@ -8,16 +8,18 @@ GET http://localhost:3000/empresas/1 HTTP/1.1
 ### Create
 POST http://localhost:3000/empresas HTTP/1.1
 Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsIm5hbWUiOiJUZXN0ZSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNjk5ODM0NzEwLCJleHAiOjE2OTk5MjExMTB9.8KxbnDAn0DPLXcIFHlXTUcR-Vy0tfxyaR2DjWBT8_4I
 
 {
-    "cnpj": "5555555",
+    "cnpj": "5555AGD555",
     "cep": "13585458",
     "bairro_endereco": "Bairro Daqui",
     "numero_endereco": "858",
     "rua_endereco": "Rua mesmo",
     "horario_comercial_inicio": "08:00",
     "horario_comercial_final": "18:00",
-    "nome": "Onzemais"
+    "nome": "Onzemais",
+    "descricao": "Empresa de aluguel de quadras de futsal"
 }
 
 ### Update

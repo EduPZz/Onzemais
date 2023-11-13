@@ -17,6 +17,7 @@ model Empresa {
   horario_comercial_inicio String
   horario_comercial_final  String
   nome                     String
+  descricao                String
   EspacoEsportivo          EspacoEsportivo[]
   Colete                   Colete[]
   Usuario                  Usuario[]

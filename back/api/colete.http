@@ -1,5 +1,6 @@
 ### FindAll
 GET http://localhost:3000/coletes HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsIm5hbWUiOiJUZXN0ZSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNjk5ODM0NzEwLCJleHAiOjE2OTk5MjExMTB9.8KxbnDAn0DPLXcIFHlXTUcR-Vy0tfxyaR2DjWBT8_4I
 
 ### FindOne
 GET http://localhost:3000/coletes/1 HTTP/1.1
@@ -7,11 +8,12 @@ GET http://localhost:3000/coletes/1 HTTP/1.1
 ### Create
 POST http://localhost:3000/coletes HTTP/1.1
 Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsIm5hbWUiOiJUZXN0ZSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNjk5ODM0NzEwLCJleHAiOjE2OTk5MjExMTB9.8KxbnDAn0DPLXcIFHlXTUcR-Vy0tfxyaR2DjWBT8_4I
 
 {
-    "cor": "vermelho",
+    "cor": "#f542dd",
     "valor_quantidade": 10,
-    "empresa_id": 2
+    "empresa_id": 1
 }
 
 ### Update

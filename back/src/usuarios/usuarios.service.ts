@@ -17,7 +17,7 @@ export class UsuariosService {
       where: { email: createUsuarioDto.email },
     });
 
-    if (exists) throw new BadRequestException('Usuário já existe');
+    if (exists) throw new BadRequestException('Email já cadastrado!');
 
     if (createUsuarioDto?.empresa_id) {
       await this.empresasService.findOne(createUsuarioDto.empresa_id);

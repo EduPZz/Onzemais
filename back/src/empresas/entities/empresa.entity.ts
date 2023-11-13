@@ -10,4 +10,5 @@ export class EmpresaEntity implements Empresa {
   horario_comercial_inicio: string;
   horario_comercial_final: string;
   nome: string;
+  descricao: string;
 }
