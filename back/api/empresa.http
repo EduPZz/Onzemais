@@ -11,15 +11,15 @@ Content-Type:  application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsIm5hbWUiOiJUZXN0ZSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNjk5ODM0NzEwLCJleHAiOjE2OTk5MjExMTB9.8KxbnDAn0DPLXcIFHlXTUcR-Vy0tfxyaR2DjWBT8_4I
 
 {
-    "cnpj": "5555AGD555",
+    "cnpj": "555asdf5AasdfasdfGDaasdfsdf555",
     "cep": "13585458",
-    "bairro_endereco": "Bairro Daqui",
+    "bairro_endereco": "Baasdfirro Daasdfqui",
     "numero_endereco": "858",
-    "rua_endereco": "Rua mesmo",
+    "rua_endereco": "Rua measdfsmo",
     "horario_comercial_inicio": "08:00",
     "horario_comercial_final": "18:00",
     "nome": "Onzemais",
-    "descricao": "Empresa de aluguel de quadras de futsal"
+    "descricao": "Empresa de aluguel de quaasdfdras de futsal"
 }
 
 ### Update
