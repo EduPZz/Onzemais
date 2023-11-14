@@ -5,7 +5,6 @@ import { Navigate, Route, Routes, Outlet } from 'react-router-dom';
 import { Context } from './Context/AuthContext';
 
 import Login from './pages/login';
-import Private from './pages/private';
 import Signin from './pages/signin';
 import LoggedInLayout from './layout';
 import Empresas from './pages/empresas';
@@ -46,9 +45,9 @@ export default function AppRoutes() {
       <Route path="/signin" element={<Signin/>} />
       <Route element={<LogedRoutes/>}>
         <Route element={<LoggedInLayout/>}>
-          <Route path="/privado" element={<Private/>} />
-          <Route path="/empresas/:id" element={<Empresa/>} />
+          <Route path="/" element={<Empresas/>} />
           <Route path="/empresas" element={<Empresas/>} />
+          <Route path="/empresas/:id" element={<Empresa/>} />
           <Route path="/locacoes" element={<Locacoes/>} />
           <Route path="/alugar/:id" element={<Alugar/>} />
           <Route path="/admin" element={<AdminRoutes/>}>

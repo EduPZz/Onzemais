@@ -46,7 +46,7 @@ export default function useAuth() {
       setAuthenticated(true);
       setUser(getUser());
       successFunc("Logado com sucesso!");
-      navigate("/privado");
+      navigate("/empresas");
     } catch (error) {
       errorFunc(error.response.data.message);
     }
