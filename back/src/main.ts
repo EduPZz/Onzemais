@@ -11,7 +11,7 @@ async function bootstrap() {
 
   // Ativar o cors para receber requisões locais
   app.enableCors({
-    origin: 'http://localhost:4000',
+    origin: 'http://localhost:3001',
   });
 
   // Ativar camadas de proteções
