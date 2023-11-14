@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 import api from "../../services/api";
 import {
@@ -18,6 +18,8 @@ import { PlusOutlined, DeleteOutlined, SkinTwoTone } from "@ant-design/icons";
 import campo from "../../assets/Soccer-Field.svg";
 import Meta from "antd/es/card/Meta";
 
+import { Context } from "../../Context/AuthContext";
+
 const { RangePicker } = DatePicker;
 
 export function Alugar() {
@@ -26,19 +28,21 @@ export function Alugar() {
   const [showAddPartidaModal, setShowAddPartidaModal] = useState(false);
   const [showAddColeteModal, setShowAddColeteModal] = useState(false);
   const [form] = Form.useForm();
-  const [dataInicioLocacaoPartida, setDataInicioLocacaoPartida] = useState(null);
+  const [dataInicioLocacaoPartida, setDataInicioLocacaoPartida] =
+    useState(null);
   const [dataFinalLocacaoPartida, setDataFinalLocacaoPartida] = useState(null);
   const [dataInicioLocacaoColete, setDataInicioLocacaoColete] = useState(null);
   const [dataFinalLocacaoColete, setDataFinalLocacaoColete] = useState(null);
   const [partidas, setPartidas] = useState([]);
   const [coletes, setColetes] = useState([]);
 
+  const { user } = useContext(Context);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await api.get(`/empresas/${id}`);
         setEmpresa(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -54,8 +58,6 @@ export function Alugar() {
   };
 
   const hasEmpresaColetes = () => {
-    console.log(empresa)
-
     if (empresa?.Colete?.length > 0) {
       return true;
     }
@@ -80,6 +82,9 @@ export function Alugar() {
     partidas.push(partida);
 
     setShowAddPartidaModal(false);
+    form.resetFields();
+    setDataInicioLocacaoPartida(null);
+    setDataFinalLocacaoPartida(null);
   };
 
   const onFinishColete = async (values) => {
@@ -88,10 +93,14 @@ export function Alugar() {
       data_inicio_locacao: dataInicioLocacaoColete,
       data_final_locacao: dataFinalLocacaoColete,
     };
-    
+
     coletes.push(colete);
     setShowAddColeteModal(false);
-  }
+    form.resetFields();
+    setDataInicioLocacaoColete(null);
+    setDataFinalLocacaoColete(null);
+  };
+
   const horarioBuilder = (partida) => {
     const dataInicio = new Date(partida.data_inicio_locacao);
     const dataFim = new Date(partida.data_final_locacao);
@@ -125,7 +134,57 @@ export function Alugar() {
     message.success("Partida deletada com sucesso!");
   };
 
-  console.log(partidas);
+
+  const locarPartidas = async (locacaoId) => {
+    for (const partida of partidas) {
+      try {
+        await api.post("/partidas", {
+          ...partida,
+          locacaoId,
+        });
+      } catch (error) {
+        console.log(error);
+        message.error("Erro ao criar partida!");
+      }
+    }
+  };
+
+  const locarColetes = async (locacaoId) => {
+    for (const colete of coletes) {
+      console.log(colete)
+      try {
+        await api.post("/alugueis-coletes", {
+          ...colete,
+          locacaoId: locacaoId,
+        });
+      } catch (error) {
+        console.log(error);
+        message.error("Erro ao criar colete!");
+      }
+    }
+  };
+
+  const createLocacao = async () => {
+    const locacao = {
+      foi_pago: false,
+      empresa_id: empresa.id,
+      usuarioId: user.id,
+    };
+
+    try {
+      const { data } = await api.post("/locacoes", locacao);
+      if (partidas.length > 0) {
+        locarPartidas(data.id);
+      }
+      if (coletes.length > 0) {
+        locarColetes(data.id);
+      }
+      message.success("Aluguel criado com sucesso!");
+    } catch (error) {
+      console.log(error);
+      message.error("Erro ao criar locacao!");
+    }
+  }
 
   return (
     <div>
@@ -172,15 +231,20 @@ export function Alugar() {
                           cover={<img alt="example" src={campo} />}
                           style={{
                             width: 240,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'space-between'
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-between",
                           }}
                         >
                           <div>
                             <p>{horarioBuilder(partida)}</p>
                           </div>
-                          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-end",
+                            }}
+                          >
                             <Popconfirm
                               title="Tem certeza que deseja deletar esta partida?"
                               onConfirm={() => handleDeletePartida(partida)}
@@ -217,7 +281,6 @@ export function Alugar() {
                         color: "#1890ff",
                         cursor: "pointer",
                       }}
-                      onClick={handleClick}
                     />
                   </div>
                 </div>
@@ -227,10 +290,12 @@ export function Alugar() {
               <Card
                 hoverable
                 style={{ width: 240, marginTop: 32 }}
-                cover={<SkinTwoTone
-                  twoToneColor="#eb2f96"
-                  style={{ fontSize: "100px" }}
-                />}
+                cover={
+                  <SkinTwoTone
+                    twoToneColor="#eb2f96"
+                    style={{ fontSize: "100px" }}
+                  />
+                }
                 onClick={handleOpenAddColeteModal}
               >
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -241,41 +306,81 @@ export function Alugar() {
             )}
             {coletes.length > 0 && (
               <>
-                <List 
-                  grid={{
-                    gutter: 16,
-                    xs: 1,
-                    sm: 1,
-                    md: 3,
-                    lg: 3,
-                    xl: 5,
-                    xxl: 2,
+                <div
+                  style={{
+                    display: "flex",
                   }}
-                  dataSource={coletes}
-                  renderItem={(colete) => (
-                    <List.Item>
-                      <Card
-                        hoverable
-                        style={{ width: 240 }}
-                        cover={
-                          <SkinTwoTone
-                            twoToneColor={colete.cor}
-                            style={{ fontSize: "100px" }}
-                          />
-                        }
-                      >
-                        <Meta
-                          description={horarioBuilder(colete)}
-                        />
-                      </Card>
-                    </List.Item>  
-                  )}
-                />
+                >
+                  <List
+                    grid={{
+                      gutter: 16,
+                      xs: 1,
+                      sm: 1,
+                      md: 3,
+                      lg: 3,
+                      xl: 5,
+                      xxl: 2,
+                    }}
+                    dataSource={coletes}
+                    renderItem={(colete) => (
+                      <List.Item>
+                        <Card
+                          hoverable
+                          style={{ width: 240 }}
+                          cover={
+                            <SkinTwoTone
+                              twoToneColor={colete.cor}
+                              style={{ fontSize: "100px" }}
+                            />
+                          }
+                        >
+                          <Meta description={horarioBuilder(colete)} />
+                        </Card>
+                      </List.Item>
+                    )}
+                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginLeft: 32,
+                      width: 240,
+                      borderRadius: 8,
+                    }}
+                    onClick={handleOpenAddColeteModal}
+                  >
+                    <PlusOutlined
+                      style={{
+                        fontSize: 32,
+                        color: "#1890ff",
+                        cursor: "pointer",
+                      }}
+                    />
+                  </div>
+                </div>
               </>
             )}
           </>
+          {partidas.length > 0 || coletes.length > 0 ? (
+            <>
+              <Button
+                size="large"
+                onClick={createLocacao}
+                style={{
+                  position: "fixed",
+                  bottom: "20px",
+                  right: "32px",
+                  backgroundColor: "#8FDF70",
+                  borderColor: "#8FDF70",
+                  color: "#fff",
+                }}
+              >
+                Alugar
+              </Button>
+            </>
+          ) : null} 
         </div>
-        
       )}
       <Modal
         title="Marcar partida"
@@ -285,7 +390,7 @@ export function Alugar() {
       >
         <Form
           form={form}
-          name="normal_login"
+          name="aluguel-partida"
           className="login-form"
           onFinish={onFinishPartida}
         >
@@ -322,11 +427,11 @@ export function Alugar() {
       >
         <Form
           form={form}
-          name="normal_login"
+          name="aluguel-colete"
           className="login-form"
           onFinish={onFinishColete}
         >
-          <Form.Item name="espacoId" label="Cor do colete">
+          <Form.Item name="coleteId" label="Cor do colete">
             <Select>
               {empresa?.Colete?.map((colete) => (
                 <Select.Option value={colete.id} key={colete.id}>
