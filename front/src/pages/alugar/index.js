@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import api from "../../services/api";
 import {
@@ -35,6 +35,7 @@ export function Alugar() {
   const [dataFinalLocacaoColete, setDataFinalLocacaoColete] = useState(null);
   const [partidas, setPartidas] = useState([]);
   const [coletes, setColetes] = useState([]);
+  const navigate = useNavigate();
 
   const { user } = useContext(Context);
 
@@ -180,6 +181,7 @@ export function Alugar() {
         locarColetes(data.id);
       }
       message.success("Aluguel criado com sucesso!");
+      navigate("/locacoes");
     } catch (error) {
       console.log(error);
       message.error("Erro ao criar locacao!");
@@ -309,6 +311,7 @@ export function Alugar() {
                 <div
                   style={{
                     display: "flex",
+                    marginTop: 32,
                   }}
                 >
                   <List
