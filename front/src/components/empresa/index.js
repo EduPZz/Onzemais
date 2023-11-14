@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button, Divider, Typography } from "antd";
 import { Card, List } from "antd";
 
 import { empresaEnderecoBulder } from "../../helpers/empresaEnderecoBuilder";
 import api from "../../services/api";
-import map from "../../assets/map.jpg";
 import { SkinTwoTone } from "@ant-design/icons";
-import { FloatButton } from "antd";
 
 const { Meta } = Card;
 const { Title, Paragraph } = Typography;
@@ -21,15 +19,12 @@ const Empresa = () => {
       try {
         const { data } = await api.get(`/empresas/${id}`);
         setEmpresa(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
   }, [id]);
-
-  console.log(empresa);
 
   return (
     <>
@@ -117,19 +112,21 @@ const Empresa = () => {
 
       {empresa?.EspacoEsportivo.length > 0 || empresa?.Colete.length > 0 ? (
         <>
-          <Button
-            size="large"
-            style={{
-              position: "fixed",
-              bottom: "20px",
-              right: "32px",
-              backgroundColor: "#8FDF70",
-              borderColor: "#8FDF70",
-              color: "#fff",
-            }}
-          >
-            Alugar
-          </Button>
+          <Link to={'/alugar/' + id}>
+            <Button
+              size="large"
+              style={{
+                position: "fixed",
+                bottom: "20px",
+                right: "32px",
+                backgroundColor: "#8FDF70",
+                borderColor: "#8FDF70",
+                color: "#fff",
+              }}
+            >
+              Alugar
+            </Button>
+          </Link>
         </>
       ) : null}
     </>

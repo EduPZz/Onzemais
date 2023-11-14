@@ -1,6 +1,6 @@
 ### FindAll
 GET http://localhost:3000/partidas HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsIm5hbWUiOiJFZHVhcmFzZGFzZGZmZG8iLCJwZXJmaWwiOiJhZGFzZGZtaW4iLCJpYXQiOjE2OTk3NDcwMzAsImV4cCI6MTY5OTgzMzQzMH0.YMhhfyuSEUxYWKFsUUjoPV-4-movEacQRqYleu6dS7M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3RlIiwicGVyZmlsIjoiYWRtaW4iLCJpYXQiOjE2OTk5Mjc1MzEsImV4cCI6MTcwMDAxMzkzMX0.w7U5HaHH2TQmyJYDqqv6w10IB5XQyuNh-oUJIKcVpYg
 
 ### FindOne
 GET http://localhost:3000/partidas/1 HTTP/1.1
@@ -13,7 +13,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsIm5hbWUiO
 {
     "data_inicio_locacao": "2023-11-14T21:49:58.543Z",
     "data_final_locacao": "2023-11-14T22:49:58.543Z",
-    "locacaoId": 1,
+    "locacaoId": 10,
     "espacoId": 1,
     "campeonatoId": null
 }

@@ -1,11 +1,12 @@
 ### FindAll
 GET http://localhost:3000/campeonatos HTTP/1.1
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3RlIiwicGVyZmlsIjoiYWRtaW4iLCJpYXQiOjE2OTk5Mjc1MzEsImV4cCI6MTcwMDAxMzkzMX0.w7U5HaHH2TQmyJYDqqv6w10IB5XQyuNh-oUJIKcVpYg
 ### FindOne
 GET http://localhost:3000/campeonatos/1 HTTP/1.1
 
 ### Create
 POST http://localhost:3000/campeonatos HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3RlIiwicGVyZmlsIjoiYWRtaW4iLCJpYXQiOjE2OTk5Mjc1MzEsImV4cCI6MTcwMDAxMzkzMX0.w7U5HaHH2TQmyJYDqqv6w10IB5XQyuNh-oUJIKcVpYg
 Content-Type:  application/json
 
 {

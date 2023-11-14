@@ -14,21 +14,6 @@ export class LocacoesService {
     private readonly usuariosService: UsuariosService,
   ) {}
 
-  async create(createLocacoeDto: CreateLocacoeDto) {
-    await this.empresasService.findOne(createLocacoeDto.empresa_id);
-    await this.usuariosService.findOne(createLocacoeDto.usuarioId);
-
-    return this.prisma.locacao.create({ data: createLocacoeDto });
-  }
-
-  findAll() {
-    return this.prisma.locacao.findMany();
-  }
-
-  findOne(id: number) {
-    return this.prisma.locacao.findUniqueOrThrow({ where: { id } });
-  }
-
   calculatePartidaTotalValue(locacao: Locacao) {
     let total = 0;
     for (const partida of locacao['Partida']) {
@@ -55,6 +40,34 @@ export class LocacoesService {
       totalPartida = this.calculatePartidaTotalValue(locacao);
     }
     return totalColete + totalPartida;
+  }
+
+  async create(createLocacoeDto: CreateLocacoeDto) {
+    await this.empresasService.findOne(createLocacoeDto.empresa_id);
+    await this.usuariosService.findOne(createLocacoeDto.usuarioId);
+
+    return this.prisma.locacao.create({ data: createLocacoeDto });
+  }
+
+  findAll() {
+    return this.prisma.locacao.findMany();
+  }
+
+  findOne(id: number) {
+    const locacoes = this.prisma.locacao.findUniqueOrThrow({
+      where: { id },
+      include: {
+        AluguelColete: {
+          orderBy: { data_final_locacao: 'asc' },
+        },
+        Partida: {
+          orderBy: { data_final_locacao: 'asc' },
+        },
+        empresa: { include: { EspacoEsportivo: true, Colete: true } },
+      },
+    });
+
+    return locacoes;
   }
 
   async findByUser(id: number) {

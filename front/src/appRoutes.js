@@ -11,6 +11,7 @@ import LoggedInLayout from './layout';
 import Empresas from './pages/empresas';
 import Empresa from './components/empresa';
 import Locacoes from './pages/locacoes';
+import { Alugar } from './pages/alugar';
 
 
 function LogedRoutes() {
@@ -30,7 +31,6 @@ function LogedRoutes() {
 function AdminRoutes(){
   const { user } = useContext(Context);
 
-  console.log(user)
   if(user.perfil !== 'admin'){
     return <Navigate to="/privado" />;
   }
@@ -50,6 +50,7 @@ export default function AppRoutes() {
           <Route path="/empresas/:id" element={<Empresa/>} />
           <Route path="/empresas" element={<Empresas/>} />
           <Route path="/locacoes" element={<Locacoes/>} />
+          <Route path="/alugar/:id" element={<Alugar/>} />
           <Route path="/admin" element={<AdminRoutes/>}>
             <Route path="*" element={<h1>Not Found 404</h1>} />
           </Route>

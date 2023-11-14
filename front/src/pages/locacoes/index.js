@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 
 import { DollarCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 
-import { Card, List, Modal } from "antd";
+import { Card, List, Modal, Button } from "antd";
 import { Link } from "react-router-dom";
 
 import { Context } from "../../Context/AuthContext";
@@ -22,7 +22,6 @@ export default function Locacoes() {
       try {
         const { data } = await api.get(`/locacoes/usuario/${user.id}`);
         setLocacoes(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -74,6 +73,15 @@ export default function Locacoes() {
     }
   }
 
+  const handlePagarLocacao = async (locacao) => {
+    try {
+      await api.patch(`/locacoes/${locacao.id}`, { foi_pago: true });
+      setLocacoes(locacoes.map(l => l.id === locacao.id ? { ...l, foi_pago: true } : l));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const date = new Date();
   const year = date.getFullYear().toString().substr(-2);
   console.log(year); // Output: 21 (if the current year is 2021)
@@ -96,13 +104,6 @@ export default function Locacoes() {
             <List.Item>
               <Card
                 title={`${horaioBuilder(locacao)}`}
-                extra={
-                  <>
-                    <Link to={`/locacoes/${locacao.id}`}>
-                      Editar
-                    </Link>
-                  </>
-                }
                 style={{
                   width: 300,
                 }}
@@ -121,18 +122,23 @@ export default function Locacoes() {
                     </>
                   )}
                 </div>
+                <DollarCircleOutlined style={{marginTop:"8px", fontSize: '12px', marginRight: '4px'}} />
+                <span>{`${locacao.valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`}</span>
                 <div style={{marginTop:"8px", display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                  <div style={{display: 'flex', alignItems: 'center'}}>
-                    <DollarCircleOutlined style={{fontSize: '12px', marginRight: '4px'}} />
-                    <span>{`${locacao.valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`}</span>
+                  <div style={{display: 'flex', alignItems: 'center'}}> 
+                    {locacao.foi_pago ? <div style={{marginTop: '4px', color: 'green'}}>Pago</div> : <div style={{marginTop: '4px', color: 'green'}}>Não pago</div>}
                   </div>
                   <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
+                    {!locacao.foi_pago && (
+                      <Button type="primary" onClick={() => handlePagarLocacao(locacao)}>Pagar</Button>
+                    )}
                     <DeleteOutlined style={{marginLeft: '10px'}} onClick={() => {
                       setLocacaoToDelete(locacao);
                       setDeleteModalVisible(true);
                     }} />
                   </div>
                 </div>
+               
               </Card>
             </List.Item>)}
           />  

@@ -20,7 +20,9 @@ export class EmpresasService {
   }
 
   findAll() {
-    return this.prisma.empresa.findMany();
+    return this.prisma.empresa.findMany({
+      include: { Colete: true, EspacoEsportivo: true },
+    });
   }
 
   findOne(id: number) {

@@ -1,6 +1,6 @@
 ### FindAll
 GET http://localhost:3000/espacos-esportivos HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsIm5hbWUiOiJUZXN0ZSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNjk5OTA5NTk0LCJleHAiOjE2OTk5OTU5OTR9.5aRZtFHgXZds7znR036Qltuq7jn-W6au4c9W0t6fi-o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3RlIiwicGVyZmlsIjoiYWRtaW4iLCJpYXQiOjE2OTk5Mjc1MzEsImV4cCI6MTcwMDAxMzkzMX0.w7U5HaHH2TQmyJYDqqv6w10IB5XQyuNh-oUJIKcVpYg
 
 ### FindOne
 GET http://localhost:3000/espacos-esportivos/1 HTTP/1.1
