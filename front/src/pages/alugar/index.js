@@ -406,7 +406,7 @@ export function Alugar() {
               ))}
             </Select>
           </Form.Item>
-          <Form.Item label="RangePicker">
+          <Form.Item label="Data da locacao">
             <RangePicker
               showTime={{ format: "HH:mm" }}
               onChange={(dates) => {
