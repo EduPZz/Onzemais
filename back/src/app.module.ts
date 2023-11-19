@@ -41,21 +41,19 @@ import { RelatoriosModule } from './relatorios/relatorios.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
-
-// export class AppModule implements NestModule {
-//   configure(consumer: MiddlewareConsumer) {
-//     consumer
-//       .apply(LoggerMiddleware)
-//       .forRoutes(
-//         AlugueisColetesController,
-//         CampeonatosController,
-//         ColetesController,
-//         EmpresasController,
-//         EspacosEsportivosController,
-//         LocacoesController,
-//         PartidasController,
-//         UsuariosController,
-//       );
-//   }
-// }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes(
+        AlugueisColetesController,
+        CampeonatosController,
+        ColetesController,
+        EmpresasController,
+        EspacosEsportivosController,
+        LocacoesController,
+        PartidasController,
+        UsuariosController,
+      );
+  }
+}
